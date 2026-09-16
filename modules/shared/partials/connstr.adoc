@@ -1,0 +1,36 @@
+= ConnStr and ports
+
+// tag::connstr[]
+The default port is 443, for TLS connections.
+You do not need to give a port number if you are using port 443 --
+`hostname = "https://<your_hostname>"` is effectively the same as `hostname = "https://<your_hostname>:" + "443" 
+
+If you are using a different port -- for example, connecting to a cluster without a load balancer, directly to the Analytics port, `18095` --
+or not using TLS,
+then see the xref:howtos:managing-connections.adoc[Connecting to Operational Insights] page.
+// end::connstr[]
+
+// tag::more-connstr[]
+Typically, an Enterprise Analytics cluster will be behind a load balancer, and you will be making a connection over TLS -- so the port used will be `443`.
+This is the defaut for the SDK, so port `443` does not need to be specified:
+`https://insights.example.com`.
+
+You must specify the schema -- either `https://` (for TLS) or `http://` (for insecure connections -- perhaps on a development machine) in the connection string.
+The default port for insecure connections is port `80`.
+
+If you're connecting to a cluster directly, without a load balancer, you can specify the port in the connection string: `https://insights.example.com:18095`.
+For a standalone Operational Insights cluster, the port is usually `18095` (or `8095` for an insecure connection).
+Make sure to check with your administrator.
+
+
+=== Client Settings Parameters
+
+Connection strings can also include client settings, which will override any that are also set in the code.
+
+.Connection string with two parameters
+----
+https://insights.example.com?timeout.connect_timeout=30s&timeout.query_timeout=2m
+----
+
+The full list of recognized parameters is documented in the xref:ref:client-settings.adoc[client settings reference].
+// end::more-connstr[]

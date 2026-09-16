@@ -1,0 +1,34 @@
+= Glossary
+:page-aliases:
+:page-topic-type: reference
+:description: Unpicking the tangled alphabet soup of the Operational Insights Platform, from an SDK perspective.
+
+
+[abstract]
+{description}
+
+
+
+Operational Insights SDK documentation uses terms from Operational Insights which may carry different meanings from those same terms in other parts of Couchbase.
+Below you will find short definitions of many Operational Insights-related terms, with links to the pages that describe them in more detail, or show practical examples of their use.
+In particular, we look to define terms that may -- of necessity -- carry slight variations of meaning from their Couchbase Server cluster use.
+
+
+// Forms a sort of index of links
+
+* xref:enterprise-analytics:sources:manage-standalone-collection.adoc#work-with-a-standalone-collection[Standalone Collection] -- 
+documents from one or more existing Columnar collections can be organized into standalone collections.
+
+
+
+== Further Reading
+
+Glossaries are available for:
+
+* xref:server:learn:glossary.adoc[Couchbase Server]
+* xref:java-sdk:reference:glossary.adoc[Couchbase operational SDKs]
+* xref:server:eventing:eventing-Terminologies.adoc[Couchbase Eventing Service]
+* xref:couchbase-lite:android:refer/java-android-refer-glossary.adoc[Couchbase Lite (Android)]
+* xref:sync-gateway:ROOT:refer/refer-sgw-glossary.adoc[Sync Gateway]
+
+The Server and SDK Glossaries takes the form of an index, linking to other pages, in the same manner as this page.

@@ -1,0 +1,17 @@
+= {name-sdk} Quickstart Guide
+:page-toclevels: 2
+:description: Install, connect, try. A quick start guide to get you up and running with Operational Insights and the {name-sdk}.
+
+[abstract]
+{description}
+
+
+
+// tag::intro[]
+xref:analytics:intro:intro.adoc[Operational Insights] is a real-time analytical database (RT-OLAP) for real time apps and operational intelligence. 
+Although maintaining some syntactic similarities with xref:home::sdk.adoc[the operational SDKs], the {name-sdk} is developed from the ground-up for column-based analytical use cases,
+and supports streaming APIs to handle large datasets.
+// end::intro[]
+
+
+== Before You Start

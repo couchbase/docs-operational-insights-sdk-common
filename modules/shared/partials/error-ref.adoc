@@ -1,0 +1,39 @@
+= Error Codes
+:nav-title: Error Codes
+:description: The standardized error codes returned by the Couchbase SDK, from cloud connection to sub-document.
+
+[abstract]
+{description}
+
+
+// tag::intro[]
+All exceptions derive from a common base Couchbase exception.
+Exceptions (errors) are broken into different classifications:
+
+* Shared Exceptions -- exceptions or errors thrown or returned by any service.
+* Specific Exceptions -- exceptions or errors thrown by a service and specific to the service that threw or returned them.
+* Internal Exceptions -- exceptions intended to be handled internally by the SDK and not exposed to the application.
+
+
+The base exception, `CouchbaseException`, has two properties -- an `ErrorContext` and an optional _Cause_.
+The `ErrorContext` provides extensive debugging information in JSON format.
+
+
+Below are the exceptions, categorised by service.
+// end::intro[]
+
+
+== Shared Error Definitions
+// tag::shared[]
+ID Range: 1-99
+
+=== # 1 Timeout
+
+Raised when a request cannot be completed until the user-defined timeout fires.
+
+Note, this is a base class for #13 and #14 (Ambiguous and Unambiguous).
+
+=== # 2 RequestCanceled
+
+Raised when a request is cancelled and cannot be resolved in a non-ambiguous way.
+Most likely the request is in-flight on the socket and the socket gets closed.

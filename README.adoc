@@ -1,0 +1,331 @@
+= Couchbase Operational Insights SDK Documentation
+
+This repository hosts the common documentation source for the
+https://docs.couchbase.com/home/operational-insights-sdk.html[Couchbase Operational Insights SDK Documentation].
+
+
+This branch contains common documents and document fragments for the 1.0 API release of each Operational Insights SDK.
+It follows the https://docs.couchbase.com/operational-insights-java-sdk/1.0/project-docs/compatibility.html#api-version[Analytics SDK 1.0 API].
+
+
+Note, the Operational Insights 1.0 SDK follows on directly from the Analytics 1.1 SDK, and should be regarded as a relatively minor upgrade other than the renaming of some APIs (these are the breaking changes).
+
+
+== Contributing
+
+Contributions are welcome!
+Please test them locally, and then submit a pull request.
+A guide to using asciidoc, building Antora locally, and working with our repos can be found at https://docs.couchbase.com/home/contribute/index.html[https://docs.couchbase.com/home/contribute/index.html] (this may still be in the middle of being updated).
+
+At a minimum, to build the docs locally, you will need:
+
+* This repo,
+https://github.com/couchbase/docs-operational-insights-sdk-common[docs-operational-insights-sdk-common],
+* One of the actual Operational Insights SDK repos, such as
+https://github.com/couchbase/docs-operational-insights-sdk-java[docs-operational-insights-sdk-java],
+* And the https://github.com/couchbase/docs-server[Server Docs repo]
+* The [Operational Insights Enterprise repo] will also be needed for most practical purposes.
+
+in your Antora playbook.
+
+If you are not sure the best way to update the docs, please raise a JIRA ticket with your suggestion, putting in as much information as possible.
+You can do this by clicking on the *Leave Feedback* button on any of the docs pages --
+usually found near the top right of the page.
+
+Alternatively, raise a
+https://github.com/couchbase/docs-operational-insights-sdk-common/issues[GitHub issue] in this repository.
+
+////
+== Notes for Docs Maintainers
+
+The philosophy behind the Information Architecture can be found in the https://docs.couchbase.com/scala-sdk/3.13/project-docs/metadoc-about-these-sdk-docs.html[meta doc].
+////
+
+=== Directory Structure
+
+Antora modules used for each SDK's repo are as follows:
+
+* concept-docs -- discussion docs explaining SDK-relevant aspects of Couchbase & Analytics (Insights); in the published docs these are now interleaved with the howtos, rather than in a separate section.
+This module also contains the mini landing pages which introduce each section.
+* devguide/examples -- the home of all code examples.
+* hello-world -- overview (landing page) and the introductory tutorials.
+* howtos -- practical explanations, with plenty of code snippets.
+These are the docs used by the majority of developers.
+* project-docs -- deployment section.
+Docs that you need to use the software (compatibility tables, release notes, etc.), but which are not about the software API.
+* ref -- reference material, such as error codes and client settings.
+* ROOT -- contains `nav.adoc`, the navigation file for this component.
+
+Within each module, docs content is mostly found in the `pages` directories, as `.adoc` files.
+Occasionally, a partial fragment in a `partials` directory contains content reused over more than one page.
+
+Most re-use is from single-sourced content in from https://github.com/couchbase/docs-operational-insights-sdk-common[this sdk-common repo].
+Here, the content is divided between partials and full pages, in the manner described below.
+
+
+== Repository Structure
+
+The files and directories in this repository are organized as an auxilary Antora documentation component.
+That means this repository doesn't contribute any pages to the documentation directly.
+Instead, it provides a) partial files (both complete pages and page fragments) which can be included into pages from another component and b) shared images that those pages can reference.
+
+At a high level, this repository contains two modules, which serve two distinct purposes:
+
+* pages
+* shared
+
+The *pages* module (not to be confused with Antora's pages folder), contains complete pages in the form of partials.
+These partials are the common pages shared by all the Analytics SDKs.
+
+The *shared* module contains page fragments, also in the form of partials.
+These partials hold information common to all the Analytics SDKs, but which do not constitute complete pages.
+
+=== Pages Module
+
+The pages module has the following structure starting from the root of the repository:
+
+....
+modules/
+  pages/
+    partials/
+      *.adoc
+    assets/
+      images
+        *.png
+....
+
+Although the AsciiDoc files are located in the [.path]_partials_ folder, they are, in fact, complete pages.
+The only reason they're located in the [.path]_partials_ folder is so that they don't get turned into pages directly.
+Instead, they need to be included into pages in the language-specific Analytics SDKs.
+
+
+////
+==== Usage
+
+One example is the "`Sample Application`" page, located in this repository at [.path]_modules/pages/partials/sample-application.adoc_.
+To promote this common page to a concrete page in one of the language-specific SDKs, create the following file in that SDK and populate it with a single include directive, as follows:
+
+.modules/hello-world/pages/sample-application.adoc
+[source,asciidoc]
+----
+\include::3.10@sdk:pages:partial$sample-application.adoc[]
+----
+
+The include directive effectively imports the common page into a page in the language-specific SDK documentation.
+Every common page must have a corresponding master page in every language-specific SDK.
+////
+
+
+////
+==== Page References
+
+All page references in the common page are assumed to be relative to the module in which the page is included (i.e., relative to the master page).
+Thus, the reference `+xref:n1ql-query.adoc[Querying with SQL++]+` refers to the [.path]_n1ql-query.adoc_ page in the same module as [.path]_sample-application.adoc_ master page in the language-specific SDK.
+
+References to all other locations, such as to server, must provide the necessary context (component, version, module, etc).
+
+All the common pages include a shared attributes file, [.path]_modules/pages/partials/attributes.adoc_
+
+[source,asciidoc]
+----
+= Document Title
+\include::partial$attributes.adoc[]
+
+...
+----
+
+The attributes file controls the version of Couchbase Server (`version-server`) as well as the path to shared images (`incimagesdir`), which will get to in the next section.
+
+The `version-server` attribute is used in the common pages to refer to pages in the Couchbase Server documentation.
+For example:
+
+[source,asciidoc]
+----
+Use the xref:8.5@server:tools:query-workbench.adoc[Query Workbench] to issue queries using the web console.
+----
+
+Using the attributes file allows the server version to be managed in a single place.
+////
+
+
+
+==== Image References
+
+Using images in the common folders is a little tricky because Antora doesn't yet support image references outside the current module (nor does the include cause the context to change).
+Therefore, it's necessary to employ a workaround.
+
+To workaround this limitation in Antora, the location of images in common pages is controlled using a shared attribute named `incimagesdir`.
+Here's how you'll use it to specify the location of images in these common pages:
+
+[source,asciidoc]
+----
+image::{incimagesdir}/travel-app-narration.png[]
+----
+
+_This is the only time in Antora you would use an attribute reference at the start of an image target._
+
+The `incimagesdir` attribute is defined in the attributes file, [.path]_modules/pages/partials/attributes.adoc_.
+The value of this attribute refers to the relative path to the images folder in the pages module (though it has to do a bit of a reach to get there).
+
+You don't have to worry about any of these details as long as you prefix the image target with `{incimagesdir}` for now.
+
+=== Shared Module
+
+The shared module has the following structure starting from the root of the repository:
+
+....
+modules/
+  shared/
+    partials/
+      *.adoc
+....
+
+This module is a little easier to understandn because it contains partials which really are partials (i.e., page fragments).
+These partials can be included into any page in the language-specific SDK documentation to provide shared content such as reference sections, explanations, definitions, phrases, etc.
+
+Although not required, the content in these partials is often selected using a tag or tags.
+
+
+
+////
+==== Usage
+
+One example is the introduction to views in the file [.path]_modules/ROOT/pages/view-queries-with-sdk.adoc_ for a language-specific SDK.
+
+[source,asciidoc]
+----
+\include::6.0@sdk:shared:partial$views.adoc[tag=views-intro]
+----
+
+This imports a page fragment that looks like the following:
+
+[source,asciidoc]
+-----
+// tag::views-intro[]
+--
+The normal CRUD methods allow you to look up a document by its ID.
+...
+
+TIP: See xref:7.1@server:understanding-couchbase:views/views-intro.adoc[Views].
+--
+// end::views-intro[]
+-----
+
+All the lines between `tag::views-intro[]` and `end::views-intro[]` get imported into the page.
+////
+
+
+
+==== Page References
+
+Like the common pages, all page references in shared partials are assumed to be relative to the module in which the partial is included.
+Thus, the reference `+xref:n1ql-query.adoc[Querying with SQL++]+` refers to the [.path]_n1ql-query.adoc_ page in the same module as [.path]_sample-application.adoc_ in the language-specific SDK.
+
+References to all other locations, such as to server, must provide the necessary context (component, version, module, etc).
+
+Unlike the common pages, the partials do not import a shared attributes file.
+That's because partials can be included partially and thus bypass attributes defined in the document header.
+Unfortunately, that means that the references in the share partials to the server have to be hard-coded for now.
+
+[source,asciidoc]
+----
+See xref:8.5@server:understanding-couchbase:views/views-intro.adoc[Views].
+----
+
+==== Image References
+
+Currently, the shared module doesn't contain any images.
+If they are added, a different workaround will have to be developed since not all partials would pick up a shared attributes file.
+
+////
+=== Single-sourced Content
+
+To make maintenance easier for docs of around a dozen SDKs, content that is common across SDK docsets is -- wherever possible -- single-sourced from the https://github.com/couchbase/docs-operational-insights-sdk-common[sdk-common] repo.
+
+We recognise that this adds a slight cognitive burden for the new maintainer, but one layer of abstraction seems a reasonable compromise for maintainability.
+To make content re-use workable, certain replaceable attributes are used.
+These are found in the antora.yml file.
+
+.Attributes for Single-sourced Content
+|===
+| Attribute | Use
+
+| `server_version:`
+| SDK dotminor releases contain new APIs to match new Server releases.
+This is the release version of Enterprise Analytics that this SDK release accompanied.
+Not often needed within the SDK documentation -- the server version in `xref` links is set with  `version-server:` (see below).
+
+| `sdk_current_version:` | Sets the current patch version.
+
+| `sdk_dot_minor:` | The current dotminor.
+
+| `sdk_dot_major:` | The current major release -- not often needed within the documentation.
+
+| `version-server:` | This is substituted into `xref` links to the Server, to ensure they land on the correct release version.
+
+| `version-common:`
+| The version (branch) of the single-sourced `sdk-common` repo.
+This is substituted into Antora `include::` directives, to pull in content from the correct branch.
+
+| `name_platform:` | Allows us to name the SDK within shared content (*Scala*).
+
+| `name-sdk:` | Allows us to name the SDK within shared content (*Scala SDK*).
+
+| `sdk_api:` | The API version of this release.
+
+| `sdk-api-link:` | Link to the latest API Reference for the SDK.
+
+| `sdk-gh-link:` | Link to the source code of the SDK.
+
+|===
+
+
+An additional attribute, `page-nav-header-levels: 1`, ensures that the left-hand navigation of the site opens with each topic unfurled by one level.
+
+=== Page Headers
+
+Each `.adoc` page contains information in the headers:
+
+[source,asciidoc]
+----
+= Compatibility
+:description: Platform compatibility, and features available in different SDK versions, and compatibility between Server and SDK. \
+Plus notes on Cloud, networks, and AWS Lambda.
+:page-aliases: ROOT:overview,ROOT:compatibility-versions-features,compatibility-versions-features
+:page-toclevels: 3
+:table-caption!:
+----
+
+The `:page-aliases:` directive enables Antora to build 502 redirects -- meaning that inbound links from, for example, old blog posts will still work with the current docset.
+
+`:page-toclevels:` should be set to `2` to include h3 headers along with h2s in the in-page navigation (right-hand nav).
+Leaving out this directive means that the page will default to `1`, showing only h2 headers in the in-page nav.
+A value of `3` should not be used, save in exceptionally complicated pages like that shown (the https://docs.couchbase.com/scala-sdk/1.6/project-docs/compatibility.html[compatibility page]).
+
+=== Patch Releases
+
+Update the following files:
+
+* antora.yml
+* build.gradle
+* modules/devguide/examples/scala/pom.xml
+* modules/project-docs/pages/sdk-release-notes.adoc
+////
+
+
+
+=== New Branches
+
+Production branches use the *release/x.y* naming pattern (e.g. `release/1.0`, `release/1.1`).
+Antora uses the branch names in the playbook, but also uses the `version` given in the antor.yml file, to create the version navigation -- so this version number must be unique within the repo for any branches included in the playbook.
+When creating a new branch for a new release, remember to update the antora.yml file before trying to build.
+
+=== Code Sample Testing
+
+This is in the process of being changed -- documentation will appear here once this is completed.
+
+
+== Docs License
+
+©2026 Couchbase, Inc.
+This work is licensed under https://creativecommons.org/licenses/by-nc-sa/4.0/[CC BY-NC-SA 4.0].

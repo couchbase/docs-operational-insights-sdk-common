@@ -1,0 +1,14 @@
+= Migration
+
+
+
+
+== Migration from Row-Based Analytics
+
+// tag::migration[]
+If you are migrating a project from CBAS -- our Analytics service on Capella Operational and Couchbase Server, using our operational SDKs -- then information on migration can be found in the xref:enterprise-analytics:migration:overview.adoc[Operational Insights docs].
+
+In particular, refer to the xref:enterprise-analytics:migration:migration-process.adoc#sdk-migration[SDK section] of the Operational Insights migration pages.
+// end::migration[]
+
+// https://github.com/couchbaselabs/couchbase-analytics-jvm-clients/blob/main/MIGRATING.md

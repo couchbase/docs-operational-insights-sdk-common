@@ -1,0 +1,175 @@
+= Compatibility
+:description: Platform compatibility, and features available in different SDK versions, and compatibility between Operational Insights and Insights SDK. \
+Plus notes on Cloud, networks, and AWS Lambda.
+:page-toclevels: 3
+:table-caption!:
+
+
+[abstract]
+{description}
+
+
+The 1.0 SDK requires Java 8 or later to be installed.
+We recommend using the most recent long-term support (LTS) version of OpenJDK.
+
+TIP: Remember to keep your Java installation up to date with the latest patches.
+
+
+
+
+== Platform Compatibility
+
+
+=== JDK Version Compatibility
+
+// tag::jdk-version[]
+The {name-sdk} is tested with Oracle JDK and OpenJDK.
+Other JDK implementations might work but are not tested and are unsupported.
+We recommend running the latest LTS version (i.e. at the time of writing JDK 21) with the highest patch version available.
+
+The following JDK releases are supported:
+
+* https://adoptium.net/[OpenJDK 25 with HotSpot JVM] (recommended)
+* https://adoptium.net/[OpenJDK 21 with HotSpot JVM]
+* https://adoptium.net/[OpenJDK 17 with HotSpot JVM]
+* https://www.oracle.com/java/technologies/downloads/#jdk17[Oracle JDK 17]
+
+Please make sure you run on one of the latest patch releases, since they provide stability improvements and security fixes in general.
+// end::jdk-version[]
+
+
+
+=== OS Compatibility
+
+// tag::os-compat-jvm[]
+In general, the JVM eliminates concerns about underlying OS compatibility, 
+and Couchbase JVM SDKs can be expected to run on all of the Operating Systems supported by xref:{version-server}@server:install:install-platforms.adoc[Couchbase Server].
+
+The {name-sdk} has been tested on a representative subset of the platforms listed below.
+
+****
+[discrete]
+=== GNU/Linux
+
+* Amazon Linux AL2023.
+* Red Hat Enterprise Linux 8, 9, & 10.
+* Oracle Linux 8, 9, & 10.
+* Ubuntu (LTS) 26.04 (_Resolute_) & 24.04 (_Noble_).
+* Debian 11 (_Bullseye_), Debian 12 (_Bookworm_), & Debian 13 (_Trixie_).
+* SUSE Enterprise Linux 12 & 15.
+* Alpine Linux 3.21 - 3.24.
+
+[discrete]
+=== Microsoft Windows
+
+* Microsoft Windows 10 & 11;
+* Windows Server 2019, 2022, & 2025.
+
+[discrete]
+=== Mac OS X
+
+The current and previous two releases of OS X.
+At time of writing (October 2026): 27 (Golden Gate), 26 (Tahoe), and 15 (Sequoia).
+****
+
+The JVM Analytics SDKs should also be expected to run on other commonly-available GNU/Linux distributions which support an appropriate JDK, but not all combinations can be tested.
+// -- notable exceptions are listed below.
+// end::os-compat-jvm[]
+
+
+// tag::os-compat[]
+Analytics SDKs can be expected to run on all of the Operating Systems supported by xref:{version-server}@server:install:install-platforms.adoc[Couchbase Server].
+
+The {name-sdk} has been tested on a representative subset of the platforms listed below.
+
+****
+[discrete]
+=== GNU/Linux
+
+* Amazon Linux AL2023.
+* Red Hat Enterprise Linux 8, 9, & 10.
+* Oracle Linux 8, 9, & 10.
+* Ubuntu (LTS) 26.04 (_Resolute_) & 24.04 (_Noble_).
+* Debian 11 (_Bullseye_), Debian 12 (_Bookworm_), & Debian 13 (_Trixie_).
+* SUSE Enterprise Linux 12 & 15.
+* Alpine Linux 3.21 - 3.24.
+
+[discrete]
+=== Microsoft Windows
+
+* Microsoft Windows 10 & 11;
+* Windows Server 2019, 2022, & 2025.
+
+[discrete]
+=== Mac OS X
+
+The current and previous two releases of OS X.
+At time of writing (October 2026): 27 (Golden Gate), 26 (Tahoe), and 15 (Sequoia).
+****
+// end::os-compat[]
+
+
+
+
+==== Alpine Linux Compatibility
+
+The https://netty.io[Netty] I/O library used by our JVM SDKs supports native optimizations to achieve higher throughput and lower latency 
+-- which the SDK enables by default. 
+Those modules are compiled against `glibc` and Alpine Linux uses `musl` instead --
+so the {name-sdk} is unable to complete bootstrapping on this platform.
+
+Because Alpine Linux does not have the `glibc` support needed,
+we highly recommend that you seek an alternative distribution where possible. 
+If that is not a option, then a possible workaround that can be applied is as follows:
+
+* Disable native IO and native TLS by setting both the `ioEnvironment.enableNativeIo` and `security.enableNativeTls` client settings to false, as in this example:
++
+[source,java]
+----
+Cluster cluster = Cluster.connect(
+  connectionString,
+  ClusterOptions.clusterOptions(username, password)
+    .environment(env -> env
+      .ioEnvironment(it -> it.enableNativeIo(false))
+      .securityConfig(it -> it.enableNativeTls(false))
+    )
+);
+----
+
+* Alternatively, disable it in Netty itself via the following system properties:
++
+[source,shell]
+----
+-Dcom.couchbase.client.core.deps.io.netty.transport.noNative=true
+-Dcom.couchbase.client.core.deps.io.netty.handler.ssl.noOpenSsl=true
+----
+
+The downside of these workarounds is potentially reduced performance, which can be determined through benchmarking and profiling.
+
+
+
+
+
+
+// tag::api-version[]
+.Insights SDK API Versions
+[cols="20,20"]
+|===
+|  |  API 1.0  
+
+| xref:dotnet-operational-insights-sdk:hello-world:overview.adoc[.NET Operational Insights SDK Docs] |
+| 1.0
+
+| xref:go-operational-insights-sdk:hello-world:overview.adoc[Go Operational Insights SDK Docs] |
+| 1.0
+
+| xref:java-operational-insights-sdk:hello-world:overview.adoc[Java Operational Insights SDK Docs] |
+| 1.0
+
+| xref:nodejs-operational-insights-sdk:hello-world:overview.adoc[Node.js Operational Insights SDK Docs] |  
+| 1.0
+
+| xref:python-operational-insights-sdk:hello-world:overview.adoc[Python Operational Insights SDK Docs] 
+| 1.0
+|===
+// end::api-version[]

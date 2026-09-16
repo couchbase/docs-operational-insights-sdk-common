@@ -1,0 +1,33 @@
+= Licenses
+:description: Couchbase Operational Insights SDKs' source code and binaries are licensed under the Apache Licence 2.0.
+
+[abstract]
+{description}
+Dependencies carry their own licenses.
+
+
+Source and any and all binaries for the Couchbase {name_platform} Operational Insights SDK are distributed under the https://www.apache.org/licenses/LICENSE-2.0[Apache License, Version 2.0].
+
+
+== Support Level
+
+Support level will match the terms of your use of your Couchbase Operational Insights Cluster(s),
+under Couchbase's Enterprise license agreement. 
+
+* https://www.couchbase.com/license-agreement/[Enterprise License Agreement]
+
+// -- this support level also applies to users of Capella Analytics.
+
+
+== Dependencies
+
+Any dependencies may have their https://www.couchbase.com/legal/agreements#ThirdPartyComponents[own, separate licenses^].
+
+
+== Documentation License
+
+This documentation is copyright Couchbase Inc.
+The docs' source is licensed under the Creative Commons https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en[CC-by-NC-SA^] license,
+see https://github.com/couchbase/docs-sdk-{name_platform_lc}/blob/release/{sdk_dot_minor}/LICENSE[https://github.com/couchbase/docs-sdk-{name_platform_lc}/blob/release/{sdk_dot_minor}/LICENSE].
+
+// It's painful to keep mis-spelling licence!

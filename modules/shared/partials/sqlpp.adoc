@@ -1,0 +1,27 @@
+= {sqlpp} Queries
+
+
+
+
+// tag::options[]
+.Available Operational Insights Options
+[options="header"]
+|====
+| Name       | Description
+| `clientContextId(String)` | Sets a context ID returned by the service for debugging purposes.
+| `parameters(JsonArray)` | Allows to set positional arguments for a parameterized query.
+| `parameters(JsonObject)` | Allows to set named arguments for a parameterized query.
+| `priority(boolean)` | Assigns a different server-side priority to the query.
+| `raw(String, Object)` | Escape hatch to add arguments that are not covered by these options.
+| `readonly(boolean)` | Tells the client and server that this query is readonly.
+| `scanConsistency(AnalyticsScanConsistency)` | Sets a different scan consistency for this query.
+| `serializer(JsonSerializer)` | Allows to use a different serializer for the decoding of the rows.
+|====
+// end::options[]
+
+
+
+
+
+// scan consistency??
+
