@@ -5,7 +5,7 @@ https://docs.couchbase.com/home/operational-insights-sdk.html[Couchbase Operatio
 
 
 This branch contains common documents and document fragments for the 1.0 API release of each Operational Insights SDK.
-It follows the https://docs.couchbase.com/operational-insights-java-sdk/1.0/project-docs/compatibility.html#api-version[Analytics SDK 1.0 API].
+It follows the https://docs.couchbase.com/operational-insights-java-sdk/1.0/project-docs/compatibility.html#api-version[Operational Insights SDK 1.0 API].
 
 
 Note, the Operational Insights 1.0 SDK follows on directly from the Analytics 1.1 SDK, and should be regarded as a relatively minor upgrade other than the renaming of some APIs (these are the breaking changes).
@@ -75,10 +75,10 @@ At a high level, this repository contains two modules, which serve two distinct 
 * shared
 
 The *pages* module (not to be confused with Antora's pages folder), contains complete pages in the form of partials.
-These partials are the common pages shared by all the Analytics SDKs.
+These partials are the common pages shared by all the Operational Insights SDKs.
 
 The *shared* module contains page fragments, also in the form of partials.
-These partials hold information common to all the Analytics SDKs, but which do not constitute complete pages.
+These partials hold information common to all the Operational Insights SDKs, but which do not constitute complete pages.
 
 === Pages Module
 
@@ -96,7 +96,7 @@ modules/
 
 Although the AsciiDoc files are located in the [.path]_partials_ folder, they are, in fact, complete pages.
 The only reason they're located in the [.path]_partials_ folder is so that they don't get turned into pages directly.
-Instead, they need to be included into pages in the language-specific Analytics SDKs.
+Instead, they need to be included into pages in the language-specific Operational Insights SDKs.
 
 
 ////
@@ -252,7 +252,7 @@ These are found in the antora.yml file.
 
 | `server_version:`
 | SDK dotminor releases contain new APIs to match new Server releases.
-This is the release version of Enterprise Analytics that this SDK release accompanied.
+This is the release version of Operational Insights that this SDK release accompanied.
 Not often needed within the SDK documentation -- the server version in `xref` links is set with  `version-server:` (see below).
 
 | `sdk_current_version:` | Sets the current patch version.
