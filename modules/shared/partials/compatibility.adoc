@@ -157,16 +157,16 @@ The downside of these workarounds is potentially reduced performance, which can 
 |===
 |  |  API 1.0  
 
-| xref:dotnet-operational-insights-sdk:hello-world:overview.adoc[.NET Operational Insights SDK Docs] |
+| xref:dotnet-operational-insights-sdk:hello-world:overview.adoc[.NET Operational Insights SDK Docs]
 | 1.0
 
-| xref:go-operational-insights-sdk:hello-world:overview.adoc[Go Operational Insights SDK Docs] |
+| xref:go-operational-insights-sdk:hello-world:overview.adoc[Go Operational Insights SDK Docs]
 | 1.0
 
-| xref:java-operational-insights-sdk:hello-world:overview.adoc[Java Operational Insights SDK Docs] |
+| xref:java-operational-insights-sdk:hello-world:overview.adoc[Java Operational Insights SDK Docs]
 | 1.0
 
-| xref:nodejs-operational-insights-sdk:hello-world:overview.adoc[Node.js Operational Insights SDK Docs] |  
+| xref:nodejs-operational-insights-sdk:hello-world:overview.adoc[Node.js Operational Insights SDK Docs] 
 | 1.0
 
 | xref:python-operational-insights-sdk:hello-world:overview.adoc[Python Operational Insights SDK Docs] 
