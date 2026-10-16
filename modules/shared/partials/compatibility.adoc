@@ -25,7 +25,7 @@ TIP: Remember to keep your Java installation up to date with the latest patches.
 // tag::jdk-version[]
 The {name-sdk} is tested with Oracle JDK and OpenJDK.
 Other JDK implementations might work but are not tested and are unsupported.
-We recommend running the latest LTS version (i.e. at the time of writing JDK 21) with the highest patch version available.
+We recommend running the latest LTS version (i.e. at the time of writing JDK 25) with the highest patch version available.
 
 The following JDK releases are supported:
 
