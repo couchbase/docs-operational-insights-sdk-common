@@ -45,7 +45,7 @@ Hence each section carries a broad introduction, highlighting points to consider
 
 === Limits of the SDK Docs
 
-Large as this docset is, it can only cover a subset of the complete Analytics SDK API.
+Large as this docset is, it can only cover a subset of the complete Operational Insights SDK API.
 For a comprehensive answer to anything not completely covered in these docs, your first port of call should always be the {sdk-api-link}[API reference].
 For many languages, you will also access this from your chosen IDE.
 
@@ -81,7 +81,7 @@ and xref:concept-docs:nonjson.adoc[working with non-JSON data].
 
 * xref:concept-docs:querying-your-data.adoc[]
 
-The heart of the Analytics Cluster -- real-time OLAP querying, with Couchbase's familiar {sqlpp} query language.
+The heart of the Operational Insights Cluster -- real-time OLAP querying, with Couchbase's familiar {sqlpp} query language.
 
 ////
 For developers with an RDBMS, Couchbase's SQL implementation, {sqlpp}, makes querying familiar.
