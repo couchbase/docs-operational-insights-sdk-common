@@ -78,7 +78,7 @@ The JVM Analytics SDKs should also be expected to run on other commonly-availabl
 
 
 // tag::os-compat[]
-Analytics SDKs can be expected to run on all of the Operating Systems supported by xref:{version-server}@server:install:install-platforms.adoc[Couchbase Server].
+Operational Insights SDKs can be expected to run on all of the Operating Systems supported by xref:{version-server}@server:install:install-platforms.adoc[Couchbase Server].
 
 The {name-sdk} has been tested on a representative subset of the platforms listed below.
 
