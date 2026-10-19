@@ -11,7 +11,7 @@ then see the xref:howtos:managing-connections.adoc[Connecting to Operational Ins
 // end::connstr[]
 
 // tag::more-connstr[]
-Typically, an Enterprise Analytics cluster will be behind a load balancer, and you will be making a connection over TLS -- so the port used will be `443`.
+Typically, an Operational Insights Enterprise cluster will be behind a load balancer, and you will be making a connection over TLS -- so the port used will be `443`.
 This is the defaut for the SDK, so port `443` does not need to be specified:
 `https://insights.example.com`.
 
