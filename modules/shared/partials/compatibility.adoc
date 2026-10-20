@@ -155,17 +155,17 @@ The downside of these workarounds is potentially reduced performance, which can 
 |===
 | | Operational Insights 2.0, 2.1  | Operational Insights 2.2  | Operational Insights 3.0
 
-| Operational Insights SDK 1.0
+| {name-sdk} 1.0
 | *✔*
 | *✔*
 | *✔*
 
-| Analytics SDK 1.1
+| {name_platform} Analytics SDK 1.1
 | *✔*
 | *✔*
 | *✔* ①
 
-| Analytics SDK 1.0
+| {name_platform} Analytics SDK 1.0
 | *✔*
 | *✔* ②
 | *✔* ① ②
